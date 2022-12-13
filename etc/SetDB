@@ -1,0 +1,33 @@
+create table User (
+    userId          VARCHAR(50),
+    userName        VARCHAR(50),
+    userSurname     VARCHAR(50),
+    userBirth       VARCHAR(50),
+    email           VARCHAR(50),
+    password        VARCHAR(50),
+    PRIMARY KEY (userId),
+    UNIQUE (email)
+);
+
+create table ObjectType (
+    objectTypeId            VARCHAR(50),
+    objectTypeDescription   VARCHAR(50),
+    PRIMARY KEY (objectTypeId)
+);
+
+create table MyObjects (
+    objectId            VARCHAR(50),
+    objectName          VARCHAR(50),
+    objectDescription   VARCHAR(200),
+    objectCoins         DOUBLE,
+    objectTypeId        VARCHAR(50),
+    PRIMARY KEY (objectId),
+    FOREIGN KEY (objectTypeId) REFERENCES ObjectType(objectTypeId)
+);
+
+create table UserMyObjects (
+    userId          VARCHAR(50),
+    objectId        VARCHAR(50),
+    FOREIGN KEY (userId) REFERENCES User(userId),
+    FOREIGN KEY (objectId) REFERENCES MyObjects(objectId)
+);
