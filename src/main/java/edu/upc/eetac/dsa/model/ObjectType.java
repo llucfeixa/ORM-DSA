@@ -1,8 +1,8 @@
 package edu.upc.eetac.dsa.model;
 
 public class ObjectType {
-    String objectTypeId;
-    String objectTypeDescription;
+    private String objectTypeId;
+    private String objectTypeDescription;
 
     public ObjectType() {
     }

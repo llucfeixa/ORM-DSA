@@ -13,120 +13,113 @@ import java.util.List;
 public class SessionImpl implements Session {
     private final Connection conn;
 
-    public SessionImpl(Connection conn){
+    public SessionImpl(Connection conn) {
         this.conn = conn;
     }
 
-    @Override
     public void save(Object entity) {
-        try{
+        try {
             String insertQuery = QueryHelper.createQueryINSERT(entity);
-
-            PreparedStatement statement = conn.prepareStatement(insertQuery);
+            PreparedStatement statement = this.conn.prepareStatement(insertQuery);
             int i = 1;
+            String[] var5 = ObjectHelper.getFields(entity);
+            int var6 = var5.length;
 
-            for(String field: ObjectHelper.getFields(entity)) {
+            for(int var7 = 0; var7 < var6; ++var7) {
+                String field = var5[var7];
                 statement.setObject(i++, ObjectHelper.getter(entity, field));
             }
+
             statement.executeQuery();
-        } catch (SQLException | NoSuchFieldException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException | InvocationTargetException | SQLException var9) {
+            var9.printStackTrace();
         }
+
     }
 
-    @Override
     public void close() throws SQLException {
-        conn.close();
+        this.conn.close();
     }
 
-    @Override
     public Object get(Class theClass, String id) {
-        Object entity;
-
         try {
-            entity = theClass.newInstance();
+            Object entity = theClass.newInstance();
             ObjectHelper.setter(entity, ObjectHelper.getIdAttributeName(theClass), id);
             String selectQuery = QueryHelper.createQuerySELECT(entity);
-
-            PreparedStatement statement = conn.prepareStatement(selectQuery);
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
             statement.setObject(1, id);
             entity = ObjectHelper.createObjects(statement.executeQuery(), theClass).get(0);
+
             assert entity != null;
 
-        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+            return entity;
+        } catch (SQLException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | ClassNotFoundException var6) {
+            throw new RuntimeException(var6);
         }
-
-        return entity;
     }
 
-    @Override
     public void update(Object object) {
-        try{
+        try {
             String updateQuery = QueryHelper.createQueryUPDATE(object);
-            PreparedStatement statement = conn.prepareStatement(updateQuery);
+            PreparedStatement statement = this.conn.prepareStatement(updateQuery);
             int i = 1;
+            String[] var5 = ObjectHelper.getFields(object);
+            int var6 = var5.length;
 
-            for(String field: ObjectHelper.getFields(object)) {
+            for(int var7 = 0; var7 < var6; ++var7) {
+                String field = var5[var7];
                 statement.setObject(i++, ObjectHelper.getter(object, field));
             }
+
             statement.setObject(i, ObjectHelper.getter(object, ObjectHelper.getIdAttributeName(object.getClass())));
-
             statement.executeQuery();
-        } catch (SQLException | NoSuchFieldException | InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException | SQLException var9) {
+            throw new RuntimeException(var9);
         }
     }
 
-    @Override
     public void delete(Object object) {
-        try{
+        try {
             String updateQuery = QueryHelper.createQueryDELETE(object);
-            PreparedStatement statement = conn.prepareStatement(updateQuery);
+            PreparedStatement statement = this.conn.prepareStatement(updateQuery);
             statement.setObject(1, ObjectHelper.getter(object, ObjectHelper.getIdAttributeName(object.getClass())));
-
             statement.executeQuery();
-        } catch (SQLException | NoSuchFieldException | InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException | SQLException var4) {
+            throw new RuntimeException(var4);
         }
     }
 
-    @Override
     public List<Object> findAll(Class theClass) {
         String selectQuery = QueryHelper.createQuerySelectAll(theClass);
-
-        PreparedStatement statement;
         List<Object> objects = null;
 
-        try{
-            statement = conn.prepareStatement(selectQuery);
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
             objects = ObjectHelper.createObjects(statement.executeQuery(), theClass);
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 NoSuchFieldException | InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | SQLException var6) {
+            var6.printStackTrace();
         }
+
         return objects;
     }
 
-    @Override
     public List<Object> findAll(Class theClass, HashMap params) {
         return null;
     }
 
-    @Override
     public List<Object> query(String query, Class theClass, HashMap params) {
         return null;
     }
 
-    @Override
     public void deleteRecords(Class theClass) {
         String selectQuery = QueryHelper.createQueryDeleteRecords(theClass);
 
-        try{
-            PreparedStatement statement = conn.prepareStatement(selectQuery);
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
             statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException var4) {
+            var4.printStackTrace();
         }
+
     }
 }

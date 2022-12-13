@@ -1,12 +1,12 @@
 package edu.upc.eetac.dsa.model;
 
 public class User {
-    String userId;
-    String userName;
-    String userSurname;
-    String userBirth;
-    String email;
-    String password;
+    private String userId;
+    private String userName;
+    private String userSurname;
+    private String userBirth;
+    private String email;
+    private String password;
     public User() {
     }
 

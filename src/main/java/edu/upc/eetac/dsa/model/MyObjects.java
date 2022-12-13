@@ -1,11 +1,11 @@
 package edu.upc.eetac.dsa.model;
 
 public class MyObjects {
-    String objectId;
-    String objectName;
-    String objectDescription;
-    double objectCoins;
-    String objectTypeId;
+    private String objectId;
+    private String objectName;
+    private String objectDescription;
+    private double objectCoins;
+    private String objectTypeId;
 
     public MyObjects() {
     }
@@ -22,7 +22,7 @@ public class MyObjects {
         return objectId;
     }
 
-    public void setIdObject(String objectId) {
+    public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
 
@@ -38,7 +38,7 @@ public class MyObjects {
         return objectDescription;
     }
 
-    public void setDescriptionObject(String objectDescription) {
+    public void setObjectDescription(String objectDescription) {
         this.objectDescription = objectDescription;
     }
 
