@@ -21,7 +21,8 @@ create table MyObjects (
     objectDescription   VARCHAR(200),
     objectCoins         DOUBLE,
     objectTypeId        VARCHAR(50),
-    PRIMARY KEY (objectId)
+    PRIMARY KEY (objectId),
+    FOREIGN KEY (objectTypeId) REFERENCES ObjectType(objectTypeId)
 );
 
 create table UserMyObjects (

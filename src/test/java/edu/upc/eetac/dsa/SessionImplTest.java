@@ -20,6 +20,8 @@ public class SessionImplTest {
         this.session.deleteRecords(User.class);
         this.session.deleteRecords(MyObjects.class);
         this.session.deleteRecords(ObjectType.class);
+        ObjectType objectType = new ObjectType("1", "Tipo 1");
+        this.session.save(objectType);
     }
 
     @Test
