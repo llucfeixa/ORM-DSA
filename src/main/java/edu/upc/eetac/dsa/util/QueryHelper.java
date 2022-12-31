@@ -1,5 +1,7 @@
 package edu.upc.eetac.dsa.util;
 
+import edu.upc.eetac.dsa.model.UserMyObjects;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +28,13 @@ public class QueryHelper {
         return buffer.toString();
     }
 
+    public static String createQueryCOUNT(Class theClass) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("SELECT COUNT(*) FROM ").append(theClass.getClass().getSimpleName());
+
+        return buffer.toString();
+    }
+
     public static String createQuerySELECT(Object entity) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException {
         String field = Arrays.stream(ObjectHelper.getFields(entity))
                 .filter(x-> x.matches("(?i).*"+"id"+".*"))
@@ -36,6 +45,14 @@ public class QueryHelper {
         buffer.append("SELECT * FROM ").append(entity.getClass().getSimpleName());
         buffer.append(" WHERE ").append(field);
         buffer.append(" = ?");
+
+        return buffer.toString();
+    }
+
+    public static String createQuerySELECTEmail(Object entity) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("SELECT * FROM ").append(entity.getClass().getSimpleName());
+        buffer.append(" WHERE email = ?");
 
         return buffer.toString();
     }
@@ -58,6 +75,14 @@ public class QueryHelper {
     public static String createQueryDELETE(Object entity) {
         StringBuffer buffer = new StringBuffer();
         buffer.append("DELETE FROM ").append(entity.getClass().getSimpleName());
+        buffer.append(" WHERE ").append(ObjectHelper.getIdAttributeName(entity.getClass())).append(" = ?");
+
+        return buffer.toString();
+    }
+
+    public static String createQueryDELETERelation(Object entity) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("DELETE FROM UserMyObjects");
         buffer.append(" WHERE ").append(ObjectHelper.getIdAttributeName(entity.getClass())).append(" = ?");
 
         return buffer.toString();

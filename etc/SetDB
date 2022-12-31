@@ -3,6 +3,7 @@ create table User (
     userName        VARCHAR(50),
     userSurname     VARCHAR(50),
     userBirth       VARCHAR(50),
+    coins           DOUBLE,
     email           VARCHAR(50),
     password        VARCHAR(50),
     PRIMARY KEY (userId),
@@ -30,4 +31,12 @@ create table UserMyObjects (
     objectId        VARCHAR(50),
     FOREIGN KEY (userId) REFERENCES User(userId),
     FOREIGN KEY (objectId) REFERENCES MyObjects(objectId)
+);
+
+create table Characters (
+    characterId            VARCHAR(50),
+    characterName          VARCHAR(50),
+    characterDescription   VARCHAR(200),
+    characterCoins         DOUBLE,
+    PRIMARY KEY (characterId)
 );

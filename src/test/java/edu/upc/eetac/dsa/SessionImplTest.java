@@ -3,6 +3,7 @@ package edu.upc.eetac.dsa;
 import edu.upc.eetac.dsa.model.MyObjects;
 import edu.upc.eetac.dsa.model.ObjectType;
 import edu.upc.eetac.dsa.model.User;
+import edu.upc.eetac.dsa.model.UserMyObjects;
 import edu.upc.eetac.dsa.util.ObjectHelper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,6 +21,7 @@ public class SessionImplTest {
         this.session.deleteRecords(User.class);
         this.session.deleteRecords(MyObjects.class);
         this.session.deleteRecords(ObjectType.class);
+        this.session.deleteRecords(UserMyObjects.class);
         ObjectType objectType = new ObjectType("1", "Tipo 1");
         this.session.save(objectType);
     }
@@ -46,22 +48,35 @@ public class SessionImplTest {
 
     @Test
     public void testUpdateObject() {
-        MyObjects myObject = new MyObjects("1", "Espada", "Espada con poderes",4.5, "1");
+        MyObjects myObject = new MyObjects("2", "Espada 2", "Espada con poderes 2",4.5, "1");
         this.session.save(myObject);
-        MyObjects myObject1 = (MyObjects) this.session.get(MyObjects.class, "1");
+        MyObjects myObject2 = (MyObjects) this.session.get(MyObjects.class, "2");
         myObject.setObjectCoins(3.0);
         this.session.update(myObject);
-        MyObjects myObject2 = (MyObjects) this.session.get(MyObjects.class, "1");
-        Assert.assertEquals(3.0, myObject2.getObjectCoins(), 0);
-        Assert.assertEquals(4.5, myObject1.getObjectCoins(), 0);
+        MyObjects myObject3 = (MyObjects) this.session.get(MyObjects.class, "2");
+        Assert.assertEquals(3.0, myObject3.getObjectCoins(), 0);
+        Assert.assertEquals(4.5, myObject2.getObjectCoins(), 0);
     }
 
     @Test
     public void testDeleteObject() {
         MyObjects myObject = new MyObjects("1", "Espada", "Espada con poderes",3.1, "1");
         this.session.save(myObject);
+        this.session.deleteRelation(myObject);
         this.session.delete(myObject);
         List<Object> myObjects = this.session.findAll(MyObjects.class);
         Assert.assertEquals(0, myObjects.size());
+    }
+
+    @Test
+    public void testBuyObject() {
+        MyObjects myObject = new MyObjects("1", "Espada", "Espada con poderes",3.1, "1");
+        this.session.save(myObject);
+        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, "llucfeixa@gmail.com", "123");
+        this.session.save(user);
+        UserMyObjects userMyObject = new UserMyObjects("1", "1");
+        this.session.save(userMyObject);
+        List<Object> userMyObjects = this.session.findAll(UserMyObjects.class);
+        Assert.assertEquals(1, userMyObjects.size());
     }
 }

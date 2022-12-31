@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="bc7af7a7-d29a-4e6f-9b5f-b72852dddd44" />
+          <option name="name" value="@dsa (DDL)" />
+          <option name="languageId" value="MariaDB" />
+          <option name="parent" value="2434a7e0-f025-422f-860a-1aaa990db96d" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/../dsa/myobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/objecttype.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/user.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/usermyobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/characters.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/dice.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/myobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/objecttype.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/user.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/usermyobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/characters.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/myobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/objecttype.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/user.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/usermyobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/characters.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/myobjects.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/objecttype.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/user.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/usermyobjects.sql" />
+            </array>
+          </option>
+          <option name="outPath" value="C:\DSA\Projecte" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

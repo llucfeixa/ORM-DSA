@@ -6,6 +6,7 @@ import edu.upc.eetac.dsa.util.QueryHelper;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,19 @@ public class SessionImpl implements Session {
         this.conn.close();
     }
 
+    public int count(Class theClass) {
+        String selectQuery = QueryHelper.createQueryCOUNT(theClass);
+        int val = 0;
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            ResultSet count = statement.executeQuery();
+            val = (int) (count.getObject(1));
+        } catch (SQLException var4) {
+            var4.printStackTrace();
+        }
+        return val;
+    }
+
     public Object get(Class theClass, String id) {
         try {
             Object entity = theClass.newInstance();
@@ -48,6 +62,23 @@ public class SessionImpl implements Session {
             String selectQuery = QueryHelper.createQuerySELECT(entity);
             PreparedStatement statement = this.conn.prepareStatement(selectQuery);
             statement.setObject(1, id);
+            entity = ObjectHelper.createObjects(statement.executeQuery(), theClass).get(0);
+
+            assert entity != null;
+
+            return entity;
+        } catch (SQLException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | ClassNotFoundException var6) {
+            throw new RuntimeException(var6);
+        }
+    }
+
+    public Object getObject(Class theClass, String email) {
+        try {
+            Object entity = theClass.newInstance();
+            ObjectHelper.setter(entity, ObjectHelper.getIdAttributeName(theClass), email);
+            String selectQuery = QueryHelper.createQuerySELECTEmail(entity);
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            statement.setObject(1, email);
             entity = ObjectHelper.createObjects(statement.executeQuery(), theClass).get(0);
 
             assert entity != null;
@@ -81,6 +112,17 @@ public class SessionImpl implements Session {
     public void delete(Object object) {
         try {
             String updateQuery = QueryHelper.createQueryDELETE(object);
+            PreparedStatement statement = this.conn.prepareStatement(updateQuery);
+            statement.setObject(1, ObjectHelper.getter(object, ObjectHelper.getIdAttributeName(object.getClass())));
+            statement.executeQuery();
+        } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException | SQLException var4) {
+            throw new RuntimeException(var4);
+        }
+    }
+
+    public void deleteRelation(Object object) {
+        try {
+            String updateQuery = QueryHelper.createQueryDELETERelation(object);
             PreparedStatement statement = this.conn.prepareStatement(updateQuery);
             statement.setObject(1, ObjectHelper.getter(object, ObjectHelper.getIdAttributeName(object.getClass())));
             statement.executeQuery();
