@@ -31,8 +31,10 @@ public interface Session {
      * nomUser, nomObject ..}
      * "select u.nom AS nomUser, o.nom AS objectUser FROM User u, Object o, UserObject uo
      * WHERE u.idUser=3 AND u.idUser = uo.idUser AND o.idObject = uo.idObject
-     *
+     * "SELECT "
      *
      */
     List<Object> query(String var1, Class var2, HashMap var3);
+    public List<Object> userMyObjects(Class theClass, String userId);
+    public List<Object> userCharacters(Class theClass, String userId);
 }

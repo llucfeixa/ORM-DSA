@@ -28,7 +28,6 @@ public class QueryHelper {
     public static String createQueryCOUNT(Class theClass) {
         StringBuffer buffer = new StringBuffer();
         buffer.append("SELECT COUNT(*) FROM ").append(theClass.getClass().getSimpleName());
-
         return buffer.toString();
     }
 
@@ -95,5 +94,17 @@ public class QueryHelper {
         StringBuffer query = new StringBuffer();
         query.append("SELECT * FROM ").append(theClass.getSimpleName());
         return query.toString();
+    }
+
+    public static String createQuerySELECTUserMyObjects() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("SELECT o.* FROM MyObjects o, UserMyObjects uo WHERE uo.userId = ? AND o.objectId = uo.objectId");
+        return buffer.toString();
+    }
+
+    public static String createQuerySELECTUserCharacters() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("SELECT c.* FROM Characters c, UserCharacters uc WHERE uc.userId = ? AND c.characterId = uc.characterId");
+        return buffer.toString();
     }
 }

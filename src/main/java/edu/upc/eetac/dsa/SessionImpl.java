@@ -162,6 +162,35 @@ public class SessionImpl implements Session {
         } catch (SQLException var4) {
             var4.printStackTrace();
         }
+    }
 
+    public List<Object> userMyObjects(Class theClass, String userId) {
+        String selectQuery = QueryHelper.createQuerySELECTUserMyObjects();
+        List<Object> objects = null;
+
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            statement.setObject(1, userId);
+            objects = ObjectHelper.createObjects(statement.executeQuery(), theClass);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | SQLException var6) {
+            var6.printStackTrace();
+        }
+
+        return objects;
+    }
+
+    public List<Object> userCharacters(Class theClass, String userId) {
+        String selectQuery = QueryHelper.createQuerySELECTUserCharacters();
+        List<Object> objects = null;
+
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            statement.setObject(1, userId);
+            objects = ObjectHelper.createObjects(statement.executeQuery(), theClass);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | SQLException var6) {
+            var6.printStackTrace();
+        }
+
+        return objects;
     }
 }
