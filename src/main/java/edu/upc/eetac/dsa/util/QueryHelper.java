@@ -1,10 +1,7 @@
 package edu.upc.eetac.dsa.util;
 
-import edu.upc.eetac.dsa.model.UserMyObjects;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.List;
 
 public class QueryHelper {
     public static String createQueryINSERT(Object entity) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException {

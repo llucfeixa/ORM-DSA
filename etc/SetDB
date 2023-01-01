@@ -40,3 +40,10 @@ create table Characters (
     characterCoins         DOUBLE,
     PRIMARY KEY (characterId)
 );
+
+create table UserCharacters (
+    userId          VARCHAR(50),
+    characterId        VARCHAR(50),
+    FOREIGN KEY (userId) REFERENCES User(userId),
+    FOREIGN KEY (characterId) REFERENCES Characters(characterId)
+);
