@@ -107,4 +107,10 @@ public class QueryHelper {
         buffer.append("SELECT c.* FROM Characters c, UserCharacters uc WHERE uc.userId = ? AND c.characterId = uc.characterId");
         return buffer.toString();
     }
+
+    public static String createQuerySELECTPartida() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("SELECT * FROM Partida WHERE userEmail = ?");
+        return buffer.toString();
+    }
 }

@@ -4,6 +4,7 @@ create table User (
     userSurname     VARCHAR(50),
     userBirth       VARCHAR(50),
     coins           DOUBLE,
+    points          INT,
     email           VARCHAR(50),
     password        VARCHAR(50),
     PRIMARY KEY (userId),
@@ -46,4 +47,15 @@ create table UserCharacters (
     characterId        VARCHAR(50),
     FOREIGN KEY (userId) REFERENCES User(userId),
     FOREIGN KEY (characterId) REFERENCES Characters(characterId)
+);
+
+create table Partida (
+    partidaId       VARCHAR(50),
+    email           VARCHAR(50),
+    objectId        VARCHAR(50),
+    characterId     VARCHAR(50),
+    mapa            INT,
+    level           INT,
+    points          INT,
+    finished        BOOLEAN
 );

@@ -37,4 +37,5 @@ public interface Session {
     List<Object> query(String var1, Class var2, HashMap var3);
     public List<Object> userMyObjects(Class theClass, String userId);
     public List<Object> userCharacters(Class theClass, String userId);
+    public List<Object> userPartidas(Class theClass, String email);
 }

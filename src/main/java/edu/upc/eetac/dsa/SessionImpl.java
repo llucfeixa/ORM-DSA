@@ -193,4 +193,19 @@ public class SessionImpl implements Session {
 
         return objects;
     }
+
+    public List<Object> userPartidas(Class theClass, String email) {
+        String selectQuery = QueryHelper.createQuerySELECTPartida();
+        List<Object> objects = null;
+
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            statement.setObject(1, email);
+            objects = ObjectHelper.createObjects(statement.executeQuery(), theClass);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | SQLException var6) {
+            var6.printStackTrace();
+        }
+
+        return objects;
+    }
 }
