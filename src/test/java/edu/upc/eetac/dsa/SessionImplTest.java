@@ -72,7 +72,7 @@ public class SessionImplTest {
     public void testBuyObject() {
         MyObjects myObject = new MyObjects("1", "Espada", "Espada con poderes",3.1, "1");
         this.session.save(myObject);
-        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123");
+        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123", "esp");
         this.session.save(user);
         UserMyObjects userMyObject = new UserMyObjects("1", "1");
         this.session.save(userMyObject);

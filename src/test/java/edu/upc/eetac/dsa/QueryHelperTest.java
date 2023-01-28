@@ -10,9 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 public class QueryHelperTest {
     @Test
     public void testCreateQueryINSERT() throws NoSuchFieldException, InvocationTargetException, IllegalAccessException {
-        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123");
+        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123", "esp");
         String query = QueryHelper.createQueryINSERT(user);
-        Assert.assertEquals("INSERT INTO User (userId, userName, userSurname, userBirth, coins, points, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", query);
+        Assert.assertEquals("INSERT INTO User (userId, userName, userSurname, userBirth, coins, points, email, password, language) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", query);
     }
 
     @Test
@@ -25,14 +25,14 @@ public class QueryHelperTest {
 
     @Test
     public void testCreateQueryUPDATE() {
-        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123");
+        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123", "esp");
         String query = QueryHelper.createQueryUPDATE(user);
-        Assert.assertEquals("UPDATE User SET userId = ?, userName = ?, userSurname = ?, userBirth = ?, coins = ?, points = ?, email = ?, password = ? WHERE userId = ?", query);
+        Assert.assertEquals("UPDATE User SET userId = ?, userName = ?, userSurname = ?, userBirth = ?, coins = ?, points = ?, email = ?, password = ?, language = ? WHERE userId = ?", query);
     }
 
     @Test
     public void testCreateQueryDELETE() {
-        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1,"llucfeixa@gmail.com", "123");
+        User user = new User("1", "Lluc", "Feixa", "29/12/2001", 50, 1, "llucfeixa@gmail.com", "123", "esp");
         String query = QueryHelper.createQueryDELETE(user);
         Assert.assertEquals("DELETE FROM User WHERE userId = ?", query);
     }

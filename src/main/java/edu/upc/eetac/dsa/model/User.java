@@ -6,13 +6,15 @@ public class User {
     private String userSurname;
     private String userBirth;
     private double coins;
-    int points;
+    private int points;
     private String email;
     private String password;
+    private String language;
+
     public User() {
     }
 
-    public User(String userId, String userName, String userSurname, String userBirth, double coins, int points, String email, String password) {
+    public User(String userId, String userName, String userSurname, String userBirth, double coins, int points, String email, String password, String language) {
         this.userId = userId;
         this.userName = userName;
         this.userSurname = userSurname;
@@ -21,7 +23,7 @@ public class User {
         this.points = points;
         this.email = email;
         this.password = password;
-
+        this.language = language;
     }
 
     public String getUserId() {
@@ -86,5 +88,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

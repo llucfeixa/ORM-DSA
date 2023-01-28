@@ -208,4 +208,19 @@ public class SessionImpl implements Session {
 
         return objects;
     }
+
+    @Override
+    public List<Object> userByPoints(Class theClass) {
+        String selectQuery = QueryHelper.createQuerySELECTUserByPoints();
+        List<Object> objects = null;
+
+        try {
+            PreparedStatement statement = this.conn.prepareStatement(selectQuery);
+            objects = ObjectHelper.createObjects(statement.executeQuery(), theClass);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | InvocationTargetException | SQLException var6) {
+            var6.printStackTrace();
+        }
+
+        return objects;
+    }
 }

@@ -110,7 +110,13 @@ public class QueryHelper {
 
     public static String createQuerySELECTPartida() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("SELECT * FROM Partida WHERE userEmail = ?");
+        buffer.append("SELECT * FROM Partida WHERE email = ?");
         return buffer.toString();
+    }
+
+    public static String createQuerySELECTUserByPoints() {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT * FROM User ORDER BY points DESC");
+        return query.toString();
     }
 }

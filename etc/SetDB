@@ -7,6 +7,7 @@ create table User (
     points          INT,
     email           VARCHAR(50),
     password        VARCHAR(50),
+    language        VARCHAR(50),
     PRIMARY KEY (userId),
     UNIQUE (email)
 );
@@ -57,5 +58,6 @@ create table Partida (
     mapa            INT,
     level           INT,
     points          INT,
-    finished        BOOLEAN
+    finished        BOOLEAN,
+    PRIMARY KEY (partidaId)
 );
