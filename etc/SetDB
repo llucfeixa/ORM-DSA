@@ -61,3 +61,21 @@ create table Partida (
     finished        BOOLEAN,
     PRIMARY KEY (partidaId)
 );
+
+create table Faqs (
+    question      VARCHAR(200),
+    answer        VARCHAR(200)
+);
+
+create table Issue (
+    informer      VARCHAR(50),
+    message       VARCHAR(200),
+    date          VARCHAR(50)
+);
+
+create table Information (
+    date          VARCHAR(50),
+    title         VARCHAR(50),
+    message       VARCHAR(200),
+    sender        VARCHAR(50)
+);

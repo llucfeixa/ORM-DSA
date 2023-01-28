@@ -44,6 +44,9 @@
               <option value="file://$PROJECT_DIR$/../dsa/usercharacters.sql" />
               <option value="file://$PROJECT_DIR$/../dsa/usermyobjects.sql" />
               <option value="file://$PROJECT_DIR$/../dsa/partida.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/faqs.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/issue.sql" />
+              <option value="file://$PROJECT_DIR$/../dsa/information.sql" />
             </array>
           </option>
           <option name="outPath" value="C:\DSA\Projecte" />
